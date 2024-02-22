@@ -8,39 +8,23 @@ use App\Models\historicotb;
 
 class HistoricotbController extends Controller
 {
-    public function index(){
-        return view('index');
-    }
-
     public function showFormHistorico(){
-        return view('cadastrar');
+        return view('TelaHistorico');
     }
-
-    public function storeHistorico(Request $request){
-        $historico= $request->validate([
-            'xxx'=>'string|required',
-            'xxx'=>'string|required',
-            'xxx'=>'string|required'
-        ]);
-
-        historico::create($historico);
-        return redirect::route('index');
-    }
-
 
     public function showGerenciador(Request $request){
-       $dados= historico::query();
-       $dados->when($request->xxx,function($query,$nome){
-        $query->where('xxx', 'like' , '%'.$nome.'%');
+       $dados= historicotb::query();
+       $dados->when($request->nome,function($query,$nome){
+        $query->where('nome', 'like' , '%'.$nome.'%');
        });
 
-       $dadoshistorico = $dadoshistorico->get();
+       $dados = $dados->get();
 
-       return view('xxx', ['historicotb' => $dadoshistorico]);
+       return view('TelaHistorico', ['historicotb' => $dados]);
     }
 
 
-    public function destroy(historico $id){
+    public function destroy(historicotb $id){
         $id->delete();
         return redirect::route('xxx');
         

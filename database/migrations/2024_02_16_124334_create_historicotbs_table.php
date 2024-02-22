@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('historicotb', function (Blueprint $table) {
+            $table->string('idLoginFK');
             $table->string('nomeFK');
             $table->string('colesterol_HDL');
             $table->string('colesterol_LDL');
